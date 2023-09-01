@@ -1,0 +1,64 @@
+---
+title: "Introduction to R Programming"
+output: html_notebook
+---
+
+### Define Items and Prices
+```{r}
+item_prices <- c(120, 32, 99, 49, 99, 75, 30)
+item_quantities <- c(1, 1, 1, 1, 1, 1, 1)
+```
+
+### Set Total Cost
+```{r}
+total_cost <- 0
+```
+
+
+### Calculate tax for each item and add to total cost
+```{r}
+for (i in 1:length(item_prices)) {
+  item_price <- item_prices[i]
+  item_quantity <- item_quantities[i]
+  
+  # Calculate tax for the item
+  item_tax <- 0.10 * item_price
+  
+  # Calculate item cost with tax
+  item_cost_with_tax <- item_price + item_tax
+  
+  # Add the cost of the item to the total cost
+  total_cost <- total_cost + (item_cost_with_tax * item_quantity)
+}
+```
+
+### Calculate Shipping Cost
+```{r}
+num_items_ordered <- sum(item_quantities)
+shipping_cost <- ifelse(num_items_ordered == 1, 4, 4 + (num_items_ordered - 1) * 2)
+ 
+```
+
+### Calculate total cost including shipping
+```{r}
+total_cost_including_shipping <- total_cost + shipping_cost
+
+
+```
+
+
+## Apply a $10 discount if the total cost is above $500
+
+```{r}
+if (total_cost_including_shipping > 500) {
+  total_cost_including_shipping <- total_cost_including_shipping - 10
+}
+
+```
+
+### Print Total Cost
+```{r}
+cat("Total cost including shipping: $", total_cost_including_shipping, "\n")
+
+```
+
